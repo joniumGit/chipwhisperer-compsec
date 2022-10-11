@@ -1,0 +1,45 @@
+#cloud-config
+version: 1
+# locale: en_US
+keyboard:
+  layout: us
+
+packages_update: true
+packages_upgrade: true
+
+packages:
+  - keyboard-configuration
+  - qemu-guest-agent
+  - ca-certificates 
+  - gcc-avr 
+  - avr-libc
+  - gcc-arm-none-eabi
+  - python3 
+  - python3-dev 
+  - python3-pip 
+  - python3-wheel 
+  - git 
+  - make 
+  - nano 
+  - libusb-dev 
+  - libmpfr-dev 
+  - libgmp-dev 
+  - libmpc-dev 
+  - libusb-1.0-0
+# late-commands:
+  # - "sudo apt update && sudo apt install -y efibootmgr"
+  # - "sudo efibootmgr"
+  # - "sudo efibootmgr -o 0007,0001,0000,0002,0003,0004,0005,0006"
+user-data:
+  preserve_hostname: false
+  hostname: vagrant
+  package_upgrade: true
+  timezone: Europe/Finland
+
+ssh_pwauth: true
+users:
+  - name: vagrant
+    passwd: $6$rounds=4096$pNYcPliG1QCP2WGC$MBf5VmxfSBJEu8EzR0kFP/Fs2BJAZgcuc8k40/GLmE68PdFtQ03nJDAc1VGIz7r0F7DE/GszNwFO5gJveH8YZ/
+    lock-passwd: false
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    shell: /bin/bash
